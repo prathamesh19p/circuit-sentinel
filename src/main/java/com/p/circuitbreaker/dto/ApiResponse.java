@@ -1,6 +1,7 @@
 package com.p.circuitbreaker.dto;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 
 /**
  * Generic API response wrapper for consistent response structure.
@@ -32,6 +33,10 @@ public class ApiResponse<T> {
 
     public static <T> ApiResponse<T> error(String message) {
         return new ApiResponse<>(false, message, null);
+    }
+
+    public static <T> ApiResponse<T> error(String message, Map<String, String> errors) {
+        return new ApiResponse<>(false, message, (T) errors);
     }
 
     public boolean isSuccess() {
@@ -76,3 +81,4 @@ public class ApiResponse<T> {
                 '}';
     }
 }
+

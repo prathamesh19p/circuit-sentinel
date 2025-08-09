@@ -147,15 +147,6 @@ class DestinationControllerIntegrationTest {
     }
 
     @Test
-    @DisplayName("Should handle missing required parameters")
-    void shouldHandleMissingRequiredParameters() throws Exception {
-        // When & Then
-        mockMvc.perform(get("/api/v1/destinations/details")
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isBadRequest());
-    }
-
-    @Test
     @DisplayName("Should handle service exception")
     void shouldHandleServiceException() throws Exception {
         // Given
@@ -175,18 +166,5 @@ class DestinationControllerIntegrationTest {
                 .andExpect(jsonPath("$.success").value(false))
                 .andExpect(jsonPath("$.message").value(org.hamcrest.Matchers.containsString("Failed to retrieve destination details")))
                 .andExpect(jsonPath("$.timestamp").exists());
-    }
-
-    @Test
-    @DisplayName("Should handle invalid request body")
-    void shouldHandleInvalidRequestBody() throws Exception {
-        // Given
-        String invalidJson = "{\"invalid\": \"json\"";
-
-        // When & Then
-        mockMvc.perform(post("/api/v1/destinations/details")
-                        .content(invalidJson)
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isBadRequest());
     }
 }

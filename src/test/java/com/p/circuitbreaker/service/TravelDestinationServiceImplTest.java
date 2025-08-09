@@ -96,9 +96,10 @@ class TravelDestinationServiceImplTest {
         String country = "USA";
 
         // When & Then
-        assertThrows(IllegalArgumentException.class, () -> {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             travelDestinationService.getDestinationDetails(destinationName, country);
         });
+        assertEquals("Destination name is required and cannot be null or empty", exception.getMessage());
     }
 
     @Test
@@ -109,9 +110,10 @@ class TravelDestinationServiceImplTest {
         String country = null;
 
         // When & Then
-        assertThrows(IllegalArgumentException.class, () -> {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             travelDestinationService.getDestinationDetails(destinationName, country);
         });
+        assertEquals("Country is required and cannot be null or empty", exception.getMessage());
     }
 
     @Test
@@ -122,9 +124,10 @@ class TravelDestinationServiceImplTest {
         String country = "USA";
 
         // When & Then
-        assertThrows(IllegalArgumentException.class, () -> {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             travelDestinationService.getDestinationDetails(destinationName, country);
         });
+        assertEquals("Destination name is required and cannot be null or empty", exception.getMessage());
     }
 
     @Test
@@ -134,11 +137,6 @@ class TravelDestinationServiceImplTest {
         String destinationName = "Rocky Mountain";
         String country = "USA";
         WebClientResponseException exception = mock(WebClientResponseException.class);
-
-        when(webClient.get()).thenReturn(requestHeadersUriSpec);
-        when(requestHeadersUriSpec.uri(anyString(), eq(destinationName), eq(country))).thenReturn(requestHeadersUriSpec);
-        when(requestHeadersUriSpec.retrieve()).thenReturn(responseSpec);
-        when(responseSpec.bodyToMono(TravelDestination.class)).thenReturn(Mono.error(exception));
 
         // When
         TravelDestination result = travelDestinationService.fallbackTravelDestination(destinationName, country, exception);
@@ -182,9 +180,10 @@ class TravelDestinationServiceImplTest {
         String country = "USA";
 
         // When & Then
-        assertThrows(IllegalArgumentException.class, () -> {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             travelDestinationService.getAttractions(destinationName, country);
         });
+        assertEquals("Destination name is required and cannot be null or empty", exception.getMessage());
     }
 
     @Test
@@ -195,9 +194,10 @@ class TravelDestinationServiceImplTest {
         String country = null;
 
         // When & Then
-        assertThrows(IllegalArgumentException.class, () -> {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             travelDestinationService.getAttractions(destinationName, country);
         });
+        assertEquals("Country is required and cannot be null or empty", exception.getMessage());
     }
 
     @Test
@@ -227,9 +227,10 @@ class TravelDestinationServiceImplTest {
         String country = "USA";
 
         // When & Then
-        assertThrows(IllegalArgumentException.class, () -> {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             travelDestinationService.getAttractions(destinationName, country);
         });
+        assertEquals("Destination name is required and cannot be null or empty", exception.getMessage());
     }
 
     @Test
@@ -240,8 +241,9 @@ class TravelDestinationServiceImplTest {
         String country = "";
 
         // When & Then
-        assertThrows(IllegalArgumentException.class, () -> {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             travelDestinationService.getAttractions(destinationName, country);
         });
+        assertEquals("Country is required and cannot be null or empty", exception.getMessage());
     }
 }

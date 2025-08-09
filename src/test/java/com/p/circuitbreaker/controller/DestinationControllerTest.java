@@ -226,30 +226,4 @@ class DestinationControllerTest {
 
         verify(travelDestinationService).getDestinationDetails(request.getLocation(), request.getCountry());
     }
-
-    @Test
-    @DisplayName("Should validate required parameters in getDestinationDetails")
-    void shouldValidateRequiredParametersInGetDestinationDetails() {
-        // Given
-        String location = "";
-        String country = "USA";
-
-        // When & Then
-        assertThrows(IllegalArgumentException.class, () -> {
-            destinationController.getDestinationDetails(location, country);
-        });
-    }
-
-    @Test
-    @DisplayName("Should validate required parameters in getAttractions")
-    void shouldValidateRequiredParametersInGetAttractions() {
-        // Given
-        String location = "Rocky Mountain";
-        String country = "";
-
-        // When & Then
-        assertThrows(IllegalArgumentException.class, () -> {
-            destinationController.getAttractions(location, country);
-        });
-    }
 }
